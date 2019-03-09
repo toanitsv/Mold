@@ -1,0 +1,28 @@
+﻿<Window x:Class="MoldCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MoldCalculator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu FontSize="15">
+            <MenuItem Header="File">
+            </MenuItem>
+            <MenuItem Header="Managment">
+                <MenuItem x:Name="miCreateANewSet" Header="Create A New Set" Click="miCreateANewSet_Click"/>
+                <MenuItem x:Name="miOrder" Header="Order" Click="miOrder_Click"/>
+                <MenuItem x:Name="miSupplier" Header="Supplier" Click="miSupplier_Click"/>
+                <MenuItem x:Name="miComponent" Header="Component" Click="miComponent_Click"/>
+                <MenuItem x:Name="miOffDay" Header="OffDay" Click="miOffDay_Click"/>
+            </MenuItem>
+            <MenuItem Header="About">
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>
