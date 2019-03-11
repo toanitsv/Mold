@@ -6,43 +6,41 @@ using MoldCalculator.Models;
 
 namespace MoldCalculator.Controllers
 {
-    public class OffDayController
+    public class OffDayMapController
     {
         // Create
-        public static void Insert(OffDay model)
+        public static void Insert(OffDay_Supplier_Mapping model)
         {
             using (var db = new MouldEntities())
             {
-                var canInsert = db.OffDays.Where(w => w.OffDate.Value.Year == model.OffDate.Value.Year
-                                                   && w.OffDate.Value.Month == model.OffDate.Value.Month
-                                                   && w.OffDate.Value.Day == model.OffDate.Value.Day).ToList();
-                if (canInsert.Count() == 0)
+                var canInsert = db.OffDay_Supplier_Mappings.SingleOrDefault(s => s.ID == model.ID && s.OffDayID == model.OffDayID && s.SupplierID == model.SupplierID);
+                if (canInsert == null)
                 {
-                    db.OffDays.Add(model);
+                    db.OffDay_Supplier_Mappings.Add(model);
                     db.SaveChanges();
                 }
             }
         }
 
         // Read
-        public static List<OffDay> Select()
+        public static List<OffDay_Supplier_Mapping> Select()
         {
             using (var db = new MouldEntities())
             {
-                return db.OffDays.ToList();
+                return db.OffDay_Supplier_Mappings.ToList();
             }
         }
 
         // Update
-        public static void Update(OffDay model)
+        public static void Update(OffDay_Supplier_Mapping model)
         {
             using (var db = new MouldEntities())
             {
-                var canUpdate = db.OffDays.SingleOrDefault(s => s.OffDayID == model.OffDayID);
+                var canUpdate = db.OffDay_Supplier_Mappings.SingleOrDefault(s => s.ID == model.ID);
                 if (canUpdate != null)
                 {
-                    canUpdate.OffDate = model.OffDate;
-                    canUpdate.Description = model.Description;
+                    canUpdate.OffDayID = model.OffDayID;
+                    canUpdate.SupplierID = model.SupplierID;
                     db.SaveChanges();
                 }
             }
@@ -53,10 +51,10 @@ namespace MoldCalculator.Controllers
         {
             using (var db = new MouldEntities())
             {
-                var canDelete = db.OffDays.SingleOrDefault(s => s.OffDayID == ID);
+                var canDelete = db.OffDay_Supplier_Mappings.SingleOrDefault(s => s.ID == ID);
                 if (canDelete != null)
                 {
-                    db.OffDays.Remove(canDelete);
+                    db.OffDay_Supplier_Mappings.Remove(canDelete);
                     db.SaveChanges();
                 }
             }

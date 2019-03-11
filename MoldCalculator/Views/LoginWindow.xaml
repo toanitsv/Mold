@@ -4,15 +4,92 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MoldCalculator.Views"
-        mc:Ignorable="d"
-        Title="LoginWindow" Height="400" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="None">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid Height="30">
-            <TextBlock Text="Login" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize=""/>
+        mc:Ignorable="d" FontSize="14" ResizeMode="NoResize"
+        Title="LoginWindow" Height="250" Width="300" WindowStartupLocation="CenterScreen" WindowStyle="None" Loaded="Window_Loaded">
+    <!--FontFamily="Comic Sans MS, Verdana"-->
+    <Window.Resources>
+        <LinearGradientBrush x:Key="LinearBackground" StartPoint="0,1" EndPoint="1,0">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Offset="-0.5" Color="Gray"/>
+                <GradientStop Offset="1" Color="Transparent"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="LinearHearder" StartPoint="0,1" EndPoint="1,0">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Offset="-0.5" Color="DeepSkyBlue"/>
+                <GradientStop Offset="1.5" Color="Transparent"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="LinearButtonLogin" StartPoint="0,1" EndPoint="1,0">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Offset="1" Color="DeepSkyBlue"/>
+                <GradientStop Offset="-0.4" Color="Transparent"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Window.Resources>
+    <Border BorderBrush="DarkGray" BorderThickness="1,1,1,1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="gridHeader" Height="30" Background="{StaticResource LinearHearder}" MouseLeftButtonDown="gridHeader_MouseLeftButtonDown">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Login Mold Calculator" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                <Button x:Name="btnMinimize" Click="btnMinimize_Click" Grid.Column="1">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <TextBlock Text="_" HorizontalAlignment="Center" Width="25" Padding="8,0,5,5">
+                        <ContentPresenter/>
+                            </TextBlock>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Foreground" Value="Blue" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Foreground" Value="Blue"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Grid.Column="2" x:Name="btnClose" Click="btnClose_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <TextBlock Text="X" VerticalAlignment="Center" HorizontalAlignment="Center" Width="25" Padding="8,5,5,5">
+                        <ContentPresenter/>
+                            </TextBlock>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Foreground" Value="Blue" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Foreground" Value="Red"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1" Background="{StaticResource LinearBackground}">
+                <TextBlock Text="User Name:" Margin="40,30,180,140" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtUserName" Margin="130,40,40,150" FontFamily="Consolas" VerticalContentAlignment="Center"/>
+
+                <TextBlock Text="Password:" Margin="40,90,180,100" VerticalAlignment="Center"/>
+                <PasswordBox x:Name="txtPassword" Margin="130,90,40,100" VerticalContentAlignment="Center"/>
+
+                <Button x:Name="btnLogin" Content="Login" Height="28" Margin="40,150,40,40" Background="{StaticResource LinearButtonLogin}" Click="btnLogin_Click" IsDefault="True"/>
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </Window>

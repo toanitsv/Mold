@@ -22,5 +22,37 @@ namespace MoldCalculator.Views
         {
             InitializeComponent();
         }
+
+        private void gridHeader_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            this.Hide();
+            window.ShowDialog();
+
+
+            txtPassword.Clear();
+            this.Show();
+                 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtUserName.Focus();
+        }
     }
 }

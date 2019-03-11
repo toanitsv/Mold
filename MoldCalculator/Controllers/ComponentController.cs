@@ -41,6 +41,7 @@ namespace MoldCalculator.Controllers
                 {
                     canUpdate.ComponentName = model.ComponentName;
                     canUpdate.Description = model.Description;
+                    canUpdate.ModifiedTime = DateTime.Now;
                     db.SaveChanges();
                 }
             }

@@ -62,6 +62,7 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\ComponentController.cs" />
     <Compile Include="Controllers\OffDayController.cs" />
+    <Compile Include="Controllers\OffDayMapController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Models\ComponentShoe.cs">

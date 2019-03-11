@@ -1,25 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="MouldModelStoreContainer" CdmEntityContainer="MouldEntities">
-    <EntitySetMapping Name="OffDays">
-      <EntityTypeMapping TypeName="MouldModel.OffDay">
-        <MappingFragment StoreEntitySet="OffDay">
-          <ScalarProperty Name="OffDayID" ColumnName="OffDayID" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OffDay_Supplier_Mapping">
-      <EntityTypeMapping TypeName="MouldModel.OffDay_Supplier_Mapping">
-        <MappingFragment StoreEntitySet="OffDay_Supplier_Mapping">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-          <ScalarProperty Name="OffDayID" ColumnName="OffDayID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="MouldModel.Order">
         <MappingFragment StoreEntitySet="Order">
@@ -54,6 +35,25 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ComponentName" ColumnName="ComponentName" />
           <ScalarProperty Name="ComponentID" ColumnName="ComponentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OffDay_Supplier_Mapping">
+      <EntityTypeMapping TypeName="MouldModel.OffDay_Supplier_Mapping">
+        <MappingFragment StoreEntitySet="OffDay_Supplier_Mapping">
+          <ScalarProperty Name="OffDayID" ColumnName="OffDayID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OffDays">
+      <EntityTypeMapping TypeName="MouldModel.OffDay">
+        <MappingFragment StoreEntitySet="OffDay">
+          <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="OffDate" ColumnName="OffDate" />
+          <ScalarProperty Name="OffDayID" ColumnName="OffDayID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\PhucNguyen\Desktop\Mold\MoldCalculator\obj\Debug\
+C:\Users\PhucNguyen\Desktop\Mold\Mold\MoldCalculator\obj\Debug\
 MoldCalculator
 none
 false
 DEBUG;TRACE
-C:\Users\PhucNguyen\Desktop\Mold\MoldCalculator\App.xaml
+C:\Users\PhucNguyen\Desktop\Mold\Mold\MoldCalculator\App.xaml
 6-164395066
 2-1499628028
-23-567070004
-171180060370
+24-1620858243
+17-2026019792
 MainWindow.xaml;Views\ComponentWindow.xaml;Views\LoginWindow.xaml;Views\OffDayWindow.xaml;Views\OrderWindow.xaml;Views\SupplierWindow.xaml;
 
-True
+False
 

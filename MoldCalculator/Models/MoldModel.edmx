@@ -19,8 +19,8 @@
           <Key>
             <PropertyRef Name="OffDayID" />
           </Key>
-          <Property Name="OffDayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date" Type="date" />
+          <Property Name="OffDayID" Type="int" Nullable="false" />
+          <Property Name="OffDate" Type="date" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
           <Property Name="CreatedTime" Type="datetime" />
         </EntityType>
@@ -67,23 +67,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MouldModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityType Name="OffDay">
-          <Key>
-            <PropertyRef Name="OffDayID" />
-          </Key>
-          <Property Name="OffDayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="OffDay_Supplier_Mapping">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SupplierID" Type="Int32" />
-          <Property Name="OffDayID" Type="Int32" />
-        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderID" />
@@ -109,11 +92,11 @@
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityContainer Name="MouldEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="OffDays" EntityType="Self.OffDay" />
-          <EntitySet Name="OffDay_Supplier_Mapping" EntityType="Self.OffDay_Supplier_Mapping" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
           <EntitySet Name="ComponentShoes" EntityType="MouldModel.ComponentShoe" />
+          <EntitySet Name="OffDay_Supplier_Mapping" EntityType="MouldModel.OffDay_Supplier_Mapping" />
+          <EntitySet Name="OffDays" EntityType="MouldModel.OffDay" />
         </EntityContainer>
         <EntityType Name="ComponentShoe">
           <Key>
@@ -125,31 +108,29 @@
           <Property Name="CreatedTime" Type="DateTime" Precision="3" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="OffDay_Supplier_Mapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="OffDayID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="OffDay">
+          <Key>
+            <PropertyRef Name="OffDayID" />
+          </Key>
+          <Property Name="OffDayID" Type="Int32" Nullable="false" />
+          <Property Name="OffDate" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MouldModelStoreContainer" CdmEntityContainer="MouldEntities">
-          <EntitySetMapping Name="OffDays">
-            <EntityTypeMapping TypeName="MouldModel.OffDay">
-              <MappingFragment StoreEntitySet="OffDay">
-                <ScalarProperty Name="OffDayID" ColumnName="OffDayID" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OffDay_Supplier_Mapping">
-            <EntityTypeMapping TypeName="MouldModel.OffDay_Supplier_Mapping">
-              <MappingFragment StoreEntitySet="OffDay_Supplier_Mapping">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-                <ScalarProperty Name="OffDayID" ColumnName="OffDayID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="MouldModel.Order">
               <MappingFragment StoreEntitySet="Order">
@@ -184,6 +165,25 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ComponentName" ColumnName="ComponentName" />
                 <ScalarProperty Name="ComponentID" ColumnName="ComponentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OffDay_Supplier_Mapping">
+            <EntityTypeMapping TypeName="MouldModel.OffDay_Supplier_Mapping">
+              <MappingFragment StoreEntitySet="OffDay_Supplier_Mapping">
+                <ScalarProperty Name="OffDayID" ColumnName="OffDayID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OffDays">
+            <EntityTypeMapping TypeName="MouldModel.OffDay">
+              <MappingFragment StoreEntitySet="OffDay">
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OffDate" ColumnName="OffDate" />
+                <ScalarProperty Name="OffDayID" ColumnName="OffDayID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MoldCalculator.Views"
         mc:Ignorable="d" FontSize="14"
-        Title="Mold - Off Day" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Title="Mold - Off Day" Height="550" Width="1000" WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded">
+    <Window.Resources>
+        <LinearGradientBrush x:Key="BackgroundSupplier" StartPoint="0,1" EndPoint="1,0">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Offset="0" Color="DeepSkyBlue"/>
+                <GradientStop Offset="1.5" Color="Transparent"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <Style x:Key="MyButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{StaticResource BackgroundSupplier}"/>
+        </Style>
+    </Window.Resources>
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -18,22 +29,47 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Select Date: " VerticalAlignment="Center"/>
-            <TextBlock Text="Suppliers: " VerticalAlignment="Center" Grid.Row="1"/>
-            <TextBlock Text="Description: " VerticalAlignment="Bottom" Grid.Row="2"/>
+            
+            <TextBlock Text="ID:" VerticalAlignment="Center"/>
+            <TextBlock Text="Select Date: " Grid.Row="1" VerticalAlignment="Center"/>
+            <Button x:Name="btnApplyForAll" Grid.Row="2" Content="Apply For All Suppliers:" Margin="0,20,5,0" Click="btnApplyForAll_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock TextDecorations="Underline">
+                        <ContentPresenter/>
+                        </TextBlock>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Foreground" Value="Blue" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Foreground" Value="Red" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <TextBlock Text="Description: " Grid.Row="3" VerticalAlignment="Bottom"/>
 
-            <DatePicker x:Name="dpSelectOffDay" SelectedDate="04/14/1996" Grid.Column="1"/>
-
-            <TextBox x:Name="txtSupplierName" Grid.Column="1" Grid.Row="1" Margin="0,5,0,5" Height="{Binding ElementName=dpSelectOffDay,Path=ActualHeight}" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="txtDescription" Grid.Column="1"  Grid.Row="2" FontStyle="Italic" MinHeight="100" TextWrapping="Wrap"/>
-
-            <Button x:Name="btnSave" Grid.Column="1" Grid.Row="3" Margin="0,5,0,0" Width="100" HorizontalAlignment="Right" Content="Save" Click="btnSave_Click"/>
-
+            <TextBox x:Name="txtID" Grid.Column="1" VerticalContentAlignment="Center" IsEnabled="False" Height="{Binding ElementName=dpSelectOffDay,Path=ActualHeight}"/>
+            <DatePicker x:Name="dpSelectOffDay" Grid.Row="1" Grid.Column="1" SelectedDate="04/14/1996" Margin="0,5,0,0"/>
+            <Grid x:Name="grSupplier" Grid.Row="2" Grid.Column="1" Margin="0,20,0,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <TextBox x:Name="txtDescription" Grid.Row="3"  Grid.Column="1" FontStyle="Italic" MinHeight="100" TextWrapping="Wrap"/>
+            <Button x:Name="btnSave" Grid.Row="4" Grid.Column="1" Margin="0,5,0,0" Width="100" HorizontalAlignment="Right" Content="Save" Click="btnSave_Click" IsEnabled="False"/>
         </Grid>
         <Grid Grid.Column="1" Margin="5,0,0,0">
             <DataGrid x:Name="dgOffDay" AutoGenerateColumns="False" 
@@ -47,10 +83,10 @@
                     </ContextMenu>
                 </DataGrid.ContextMenu>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" IsReadOnly="True" Binding="{Binding SupplierID}"/>
-                    <DataGridTextColumn Header="Off Day" Foreground="Blue" IsReadOnly="True" Binding="{Binding SupplierName}"/>
+                    <DataGridTextColumn Header="ID" IsReadOnly="True" Binding="{Binding OffDayID}"/>
+                    <DataGridTextColumn Header="Off Day" Foreground="Blue" IsReadOnly="True" Binding="{Binding OffDate, StringFormat=MM/dd/yyyy}"/>
                     <DataGridTextColumn Header="Description" IsReadOnly="True" Binding="{Binding Description}" FontStyle="Italic"/>
-                    <DataGridTextColumn Header="Revise Time" IsReadOnly="True" Binding="{Binding ModifiedTime, StringFormat=MM/dd/yyyy}"/>
+                    <DataGridTextColumn Header="Revise Time" IsReadOnly="True" Binding="{Binding CreatedTime, StringFormat=MM/dd/yyyy}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

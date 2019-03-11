@@ -25,10 +25,10 @@ namespace MoldCalculator.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<OffDay> OffDays { get; set; }
-        public DbSet<OffDay_Supplier_Mapping> OffDay_Supplier_Mapping { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<ComponentShoe> ComponentShoes { get; set; }
+        public DbSet<OffDay_Supplier_Mapping> OffDay_Supplier_Mappings { get; set; }
+        public DbSet<OffDay> OffDays { get; set; }
     }
 }

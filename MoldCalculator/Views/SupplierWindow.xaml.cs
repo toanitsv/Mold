@@ -67,7 +67,6 @@ namespace MoldCalculator.Views
         private void bwLoad_DoWork(object sender, DoWorkEventArgs e)
         {
             supplierCurrentList = SupplierController.Select();
-            //throw new NotImplementedException();
         }
         private void bwLoad_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {

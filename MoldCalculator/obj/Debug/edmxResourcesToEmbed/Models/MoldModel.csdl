@@ -1,22 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MouldModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-  <EntityType Name="OffDay">
-    <Key>
-      <PropertyRef Name="OffDayID" />
-    </Key>
-    <Property Name="OffDayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Date" Type="DateTime" Precision="0" />
-    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="CreatedTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="OffDay_Supplier_Mapping">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SupplierID" Type="Int32" />
-    <Property Name="OffDayID" Type="Int32" />
-  </EntityType>
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="OrderID" />
@@ -42,11 +25,11 @@
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityContainer Name="MouldEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="OffDays" EntityType="Self.OffDay" />
-    <EntitySet Name="OffDay_Supplier_Mapping" EntityType="Self.OffDay_Supplier_Mapping" />
     <EntitySet Name="Orders" EntityType="Self.Order" />
     <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
     <EntitySet Name="ComponentShoes" EntityType="MouldModel.ComponentShoe" />
+    <EntitySet Name="OffDay_Supplier_Mapping" EntityType="MouldModel.OffDay_Supplier_Mapping" />
+    <EntitySet Name="OffDays" EntityType="MouldModel.OffDay" />
   </EntityContainer>
   <EntityType Name="ComponentShoe">
     <Key>
@@ -57,5 +40,22 @@
     <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="CreatedTime" Type="DateTime" Precision="3" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="OffDay_Supplier_Mapping">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SupplierID" Type="Int32" />
+    <Property Name="OffDayID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="OffDay">
+    <Key>
+      <PropertyRef Name="OffDayID" />
+    </Key>
+    <Property Name="OffDayID" Type="Int32" Nullable="false" />
+    <Property Name="OffDate" Type="DateTime" Precision="0" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedTime" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

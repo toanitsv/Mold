@@ -15,7 +15,7 @@ namespace MoldCalculator.Models
     public partial class OffDay
     {
         public int OffDayID { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<System.DateTime> OffDate { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> CreatedTime { get; set; }
     }
