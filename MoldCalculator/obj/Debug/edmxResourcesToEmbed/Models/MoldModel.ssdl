@@ -41,6 +41,17 @@
     <Property Name="CreatedTime" Type="datetime" />
     <Property Name="ModifiedTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="SizeRun">
+    <Key>
+      <PropertyRef Name="SizeRunID" />
+    </Key>
+    <Property Name="SizeRunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OutsoleCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="SizeNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="CreatedTime" Type="datetime" />
+    <Property Name="ModifiedTiime" Type="datetime" />
+  </EntityType>
   <EntityType Name="Supplier">
     <Key>
       <PropertyRef Name="SupplierID" />
@@ -56,6 +67,7 @@
     <EntitySet Name="OffDay" EntityType="Self.OffDay" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OffDay_Supplier_Mapping" EntityType="Self.OffDay_Supplier_Mapping" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SizeRun" EntityType="Self.SizeRun" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

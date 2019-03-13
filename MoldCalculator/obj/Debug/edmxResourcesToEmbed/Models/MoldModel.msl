@@ -57,5 +57,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SizeRuns">
+      <EntityTypeMapping TypeName="MouldModel.SizeRun">
+        <MappingFragment StoreEntitySet="SizeRun">
+          <ScalarProperty Name="ModifiedTiime" ColumnName="ModifiedTiime" />
+          <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="SizeNo" ColumnName="SizeNo" />
+          <ScalarProperty Name="OutsoleCode" ColumnName="OutsoleCode" />
+          <ScalarProperty Name="SizeRunID" ColumnName="SizeRunID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

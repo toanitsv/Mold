@@ -70,3 +70,5 @@ C:\Users\PhucNguyen\Desktop\Mold\Mold\MoldCalculator\obj\Debug\MoldCalculator.cs
 C:\Users\PhucNguyen\Desktop\Mold\Mold\MoldCalculator\obj\Debug\MoldCalculator.csproj.CopyComplete
 C:\Users\PhucNguyen\Desktop\Mold\Mold\MoldCalculator\obj\Debug\MoldCalculator.exe
 C:\Users\PhucNguyen\Desktop\Mold\Mold\MoldCalculator\obj\Debug\MoldCalculator.pdb
+C:\Users\PhucNguyen\Desktop\Mold\Mold\MoldCalculator\obj\Debug\Views\CreateANewSetWindow.g.cs
+C:\Users\PhucNguyen\Desktop\Mold\Mold\MoldCalculator\obj\Debug\Views\CreateANewSetWindow.baml

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -24,9 +25,15 @@ namespace MoldCalculator.Views
         BackgroundWorker bwLoad;
         BackgroundWorker bwSave;
         BackgroundWorker bwRemove;
+        BackgroundWorker bwSaveSizeRun;
+        BackgroundWorker bwRemoveSizeRun;
 
         List<Order> orderCurrentList;
         List<Order> orderToRemoveList;
+
+        List<SizeRun> sizeRunList;
+
+        List<SizeRun> sizeRunList_OutsoleCode;
 
         Order order;
         Order orderClicked;
@@ -48,8 +55,18 @@ namespace MoldCalculator.Views
             bwRemove.DoWork += bwRemove_DoWork;
             bwRemove.RunWorkerCompleted += bwRemove_RunWorkerCompleted;
 
+            bwSaveSizeRun = new BackgroundWorker();
+            bwSaveSizeRun.DoWork += bwSaveSizeRun_DoWork;
+            bwSaveSizeRun.RunWorkerCompleted += bwSaveSizeRun_RunWorkerCompleted;
+
+            bwRemoveSizeRun = new BackgroundWorker();
+            bwRemoveSizeRun.DoWork += bwRemoveSizeRun_DoWork;
+            bwRemoveSizeRun.RunWorkerCompleted += bwRemoveSizeRun_RunWorkerCompleted;
+
             orderCurrentList = new List<Order>();
             orderToRemoveList = new List<Order>();
+
+            sizeRunList = new List<SizeRun>();
 
             InitializeComponent();
         }
@@ -67,6 +84,7 @@ namespace MoldCalculator.Views
         private void bwLoad_DoWork(object sender, DoWorkEventArgs e)
         {
             orderCurrentList = OrderController.Select();
+            sizeRunList = SizeRunController.Select();
         }
         private void bwLoad_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -77,13 +95,22 @@ namespace MoldCalculator.Views
             if (orderCurrentList.Count > 0)
             {
                 txtOrderID.Text = (orderCurrentList.OrderBy(o => o.OrderID).LastOrDefault().OrderID + ran.Next(16, 1618)).ToString();
+
+                cbOutsoleCode.SelectedItem = orderCurrentList.FirstOrDefault();
+                cbOutsoleCode.ItemsSource = orderCurrentList;
+
+                // Size run order first
+                //sizeRunList_OutsoleCode = sizeRunList.Where(w => w.OutsoleCode == orderCurrentList.FirstOrDefault().OutsoleCode).ToList();
+                //var regex = new Regex(@"[a-z]|[A-Z]");
+                //sizeRunList_OutsoleCode = sizeRunList_OutsoleCode.OrderBy(o => regex.IsMatch(o.SizeNo) ? Double.Parse(regex.Replace(o.SizeNo, "100")) : Double.Parse(o.SizeNo)).ToList();
+                //LoadSizeRun(sizeRunList_OutsoleCode);
+
+                dgOrder.ItemsSource = orderCurrentList;
+                insertOrUpdate = true;
+                NonHighlightItemClicked();
+
+                this.Cursor = null;
             }
-
-            dgOrder.ItemsSource = orderCurrentList;
-            insertOrUpdate = true;
-            NonHighlightItemClicked();
-
-            this.Cursor = null;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -181,8 +208,12 @@ namespace MoldCalculator.Views
         private void dgOrder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             orderClicked = dgOrder.CurrentItem as Order;
+
             if (orderClicked == null)
                 return;
+
+            cbOutsoleCode.SelectedItem = orderClicked;
+
             insertOrUpdate = false;
             InjectModelToControl(orderClicked);
             HighlightItemClicked();
@@ -245,5 +276,142 @@ namespace MoldCalculator.Views
             txtShoeName.Foreground = Brushes.Black;
             txtQuantity.Foreground = Brushes.Black;
         }
+
+        private void btnAddSize_Click(object sender, RoutedEventArgs e)
+        {
+            var cbSelect = cbOutsoleCode.SelectedItem as Order;
+            if (cbSelect == null)
+                return;
+
+            var sizeRunAdd = new SizeRun()
+            {
+                OutsoleCode = cbSelect.OutsoleCode,
+                SizeNo = "SizeNo",
+                CreatedTime = DateTime.Now,
+                Quantity = 0
+            };
+            sizeRunList_OutsoleCode.Add(sizeRunAdd);
+            LoadSizeRun(sizeRunList_OutsoleCode);
+            scrSizeRun.ScrollToRightEnd();
+        }
+
+        private void miContextMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var menuItemClicked = sender as MenuItem;
+            if (menuItemClicked == null)
+                return;
+            var sizeRunRemove = menuItemClicked.Tag as SizeRun;
+            if (bwRemoveSizeRun.IsBusy == false)
+            {
+                this.Cursor = Cursors.Wait;
+                bwRemoveSizeRun.RunWorkerAsync(sizeRunRemove);
+            }
+        }
+
+        private void bwRemoveSizeRun_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var sizeRunRemove = e.Argument as SizeRun;
+            SizeRunController.Delete(sizeRunRemove);
+            sizeRunList_OutsoleCode.Remove(sizeRunRemove);
+        }
+        private void bwRemoveSizeRun_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.Cursor = null;
+            LoadSizeRun(sizeRunList_OutsoleCode);
+        }
+
+        private void LoadSizeRun(List<SizeRun> sizeRunAddList)
+        {
+            wpSizeRun.Children.Clear();
+            
+            foreach (var sizeRunAdd in sizeRunAddList)
+            {
+                List<SizeRun> itemsSource = new List<SizeRun>();
+                itemsSource.Add(sizeRunAdd);
+
+                DataGrid dgSizeRun = new DataGrid();
+                dgSizeRun.HeadersVisibility = DataGridHeadersVisibility.None;
+                dgSizeRun.AutoGenerateColumns = false;
+                dgSizeRun.AlternationCount = 2;
+                dgSizeRun.CanUserDeleteRows = true;
+                dgSizeRun.CanUserAddRows = false;
+                dgOrder.SelectionUnit = DataGridSelectionUnit.Cell;
+                dgSizeRun.Margin = new Thickness(0, 0, 5, 0);
+
+                var style_Size = new Style(typeof(DataGridCell));
+                var setter = new Setter(TextBlock.TextAlignmentProperty, TextAlignment.Center);
+                var setter_1 = new Setter(TextBlock.FontWeightProperty, FontWeights.Bold);
+                style_Size.Setters.Add(setter);
+                style_Size.Setters.Add(setter_1);
+
+                var style_Qty = new Style(typeof(DataGridCell));
+                style_Qty.Setters.Add(setter);
+
+                DataGridTextColumn clSize = new DataGridTextColumn();
+                clSize.Binding = new Binding("SizeNo");
+                dgSizeRun.Columns.Add(clSize);
+                clSize.MinWidth = 50;
+                clSize.CellStyle = style_Size;
+
+                DataGridTextColumn clQuantity = new DataGridTextColumn();
+                clQuantity.Binding = new Binding("Quantity");
+                clQuantity.MinWidth = 50;
+                clQuantity.CellStyle = style_Qty;
+
+                dgSizeRun.Columns.Add(clQuantity);
+
+                ContextMenu contextMenu = new ContextMenu();
+                MenuItem miContextMenu = new MenuItem();
+
+                miContextMenu.Header = "Remove";
+                miContextMenu.Tag = sizeRunAdd;
+                miContextMenu.Click += miContextMenu_Click;
+                contextMenu.Items.Add(miContextMenu);
+
+                dgSizeRun.ContextMenu = contextMenu;
+
+                dgSizeRun.ItemsSource = null;
+                dgSizeRun.ItemsSource = itemsSource;
+
+                wpSizeRun.Children.Add(dgSizeRun);
+            }
+        }
+
+        private void cbOutsoleCode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var cbSelect = cbOutsoleCode.SelectedItem as Order;
+            sizeRunList = SizeRunController.Select();
+
+            sizeRunList_OutsoleCode = sizeRunList.Where(w => w.OutsoleCode == cbSelect.OutsoleCode).ToList();
+            var regex = new Regex(@"[a-z]|[A-Z]");
+            sizeRunList_OutsoleCode = sizeRunList_OutsoleCode.OrderBy(o => regex.IsMatch(o.SizeNo) ? Double.Parse(regex.Replace(o.SizeNo, "100")) : Double.Parse(o.SizeNo)).ToList();
+            LoadSizeRun(sizeRunList_OutsoleCode);
+        }
+
+        private void btnSizeRunSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (bwSaveSizeRun.IsBusy == false)
+            {
+                btnSizeRunSave.IsEnabled = false;
+                this.Cursor = Cursors.Wait;
+                bwSaveSizeRun.RunWorkerAsync();
+            }
+        }
+        private void bwSaveSizeRun_DoWork(object sender, DoWorkEventArgs e)
+        {
+            foreach (var sizeRun in sizeRunList_OutsoleCode)
+            {
+                SizeRunController.Insert(sizeRun);
+            }
+        }
+        private void bwSaveSizeRun_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.Cursor = null;
+            btnSizeRunSave.IsEnabled = true;
+            if (bwLoad.IsBusy == false)
+            {
+                bwLoad.RunWorkerAsync();
+            }
+        }  
     }
 }

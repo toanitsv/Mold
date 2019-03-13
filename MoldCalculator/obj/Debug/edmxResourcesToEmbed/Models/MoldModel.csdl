@@ -30,6 +30,7 @@
     <EntitySet Name="ComponentShoes" EntityType="MouldModel.ComponentShoe" />
     <EntitySet Name="OffDay_Supplier_Mapping" EntityType="MouldModel.OffDay_Supplier_Mapping" />
     <EntitySet Name="OffDays" EntityType="MouldModel.OffDay" />
+    <EntitySet Name="SizeRuns" EntityType="MouldModel.SizeRun" />
   </EntityContainer>
   <EntityType Name="ComponentShoe">
     <Key>
@@ -57,5 +58,16 @@
     <Property Name="OffDate" Type="DateTime" Precision="0" />
     <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="SizeRun">
+    <Key>
+      <PropertyRef Name="SizeRunID" />
+    </Key>
+    <Property Name="SizeRunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OutsoleCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SizeNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedTiime" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

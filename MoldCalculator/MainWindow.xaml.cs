@@ -51,7 +51,8 @@ namespace MoldCalculator
 
         private void miCreateANewSet_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateANewSetWindow window = new CreateANewSetWindow();
+            window.Show();
         }
     }
 }

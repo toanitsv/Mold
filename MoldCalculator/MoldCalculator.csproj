@@ -64,6 +64,7 @@
     <Compile Include="Controllers\OffDayController.cs" />
     <Compile Include="Controllers\OffDayMapController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\SizeRunController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Models\ComponentShoe.cs">
       <DependentUpon>MoldModel.tt</DependentUpon>
@@ -92,11 +93,17 @@
     <Compile Include="Models\Order.cs">
       <DependentUpon>MoldModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SizeRun.cs">
+      <DependentUpon>MoldModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Supplier.cs">
       <DependentUpon>MoldModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Views\ComponentWindow.xaml.cs">
       <DependentUpon>ComponentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateANewSetWindow.xaml.cs">
+      <DependentUpon>CreateANewSetWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -123,6 +130,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\ComponentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateANewSetWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
