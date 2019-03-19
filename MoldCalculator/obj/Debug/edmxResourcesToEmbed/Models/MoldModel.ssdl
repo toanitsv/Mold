@@ -10,6 +10,27 @@
     <Property Name="CreatedTime" Type="datetime" />
     <Property Name="ModifiedTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="Mold">
+    <Key>
+      <PropertyRef Name="MoldID" />
+    </Key>
+    <Property Name="MoldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MoldName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Quota" Type="int" />
+    <Property Name="OutsoleCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="SupplierID" Type="int" />
+    <Property Name="ComponentID" Type="int" />
+    <Property Name="Round" Type="int" />
+    <Property Name="SizeNo" Type="nchar" MaxLength="10" />
+    <Property Name="Pairs" Type="int" />
+    <Property Name="WorkingDay" Type="float" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="FinishDate" Type="date" />
+    <Property Name="RequestDate" Type="date" />
+    <Property Name="CreatedTime" Type="datetime" />
+    <Property Name="ModifiedTime" Type="datetime" />
+  </EntityType>
   <EntityType Name="OffDay">
     <Key>
       <PropertyRef Name="OffDayID" />
@@ -64,6 +85,7 @@
   </EntityType>
   <EntityContainer Name="MouldModelStoreContainer">
     <EntitySet Name="ComponentShoe" EntityType="Self.ComponentShoe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mold" EntityType="Self.Mold" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OffDay" EntityType="Self.OffDay" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OffDay_Supplier_Mapping" EntityType="Self.OffDay_Supplier_Mapping" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />

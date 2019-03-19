@@ -143,7 +143,7 @@ namespace MoldCalculator.Views
             componentToRemoveList = dgComponent.SelectedItems.OfType<ComponentShoe>().ToList();
 
             if (componentToRemoveList.Count <= 0 ||
-                MessageBox.Show("Confirm Remove?", this.Title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                MessageBox.Show("Confirm Remove?", "Mold-Calculator", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
             {
                 return;
             }

@@ -170,7 +170,7 @@ namespace MoldCalculator.Views
         {
             orderToRemoveList = dgOrder.SelectedItems.OfType<Order>().ToList();
 
-            if (orderToRemoveList.Count <= 0 || MessageBox.Show("Confirm Remove?", this.Title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            if (orderToRemoveList.Count <= 0 || MessageBox.Show("Confirm Remove?", "Mold-Calculator", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
             {
                 return;
             }
@@ -300,7 +300,12 @@ namespace MoldCalculator.Views
             var menuItemClicked = sender as MenuItem;
             if (menuItemClicked == null)
                 return;
+
             var sizeRunRemove = menuItemClicked.Tag as SizeRun;
+            if (MessageBox.Show(String.Format("Confirm Remove Size: {0}?", sizeRunRemove.SizeNo), "Mold-Calculator", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            {
+                return;
+            }
             if (bwRemoveSizeRun.IsBusy == false)
             {
                 this.Cursor = Cursors.Wait;

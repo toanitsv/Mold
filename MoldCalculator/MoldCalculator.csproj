@@ -61,12 +61,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\ComponentController.cs" />
+    <Compile Include="Controllers\MoldController.cs" />
     <Compile Include="Controllers\OffDayController.cs" />
     <Compile Include="Controllers\OffDayMapController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SizeRunController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
+    <Compile Include="Helpers\TimerHelper.cs" />
     <Compile Include="Models\ComponentShoe.cs">
+      <DependentUpon>MoldModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mold.cs">
       <DependentUpon>MoldModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MoldModel.Context.cs">
@@ -99,6 +104,9 @@
     <Compile Include="Models\Supplier.cs">
       <DependentUpon>MoldModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddAMoldWindow.xaml.cs">
+      <DependentUpon>AddAMoldWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ComponentWindow.xaml.cs">
       <DependentUpon>ComponentWindow.xaml</DependentUpon>
     </Compile>
@@ -129,6 +137,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddAMoldWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ComponentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -201,8 +213,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

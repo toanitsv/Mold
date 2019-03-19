@@ -31,5 +31,6 @@ namespace MoldCalculator.Models
         public DbSet<OffDay_Supplier_Mapping> OffDay_Supplier_Mappings { get; set; }
         public DbSet<OffDay> OffDays { get; set; }
         public DbSet<SizeRun> SizeRuns { get; set; }
+        public DbSet<Mold> Molds { get; set; }
     }
 }

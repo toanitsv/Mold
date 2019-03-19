@@ -4,20 +4,127 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MoldCalculator.Views"
-        mc:Ignorable="d"
-        Title="Mold - Create A New Set" Height="600" Width="900" WindowStartupLocation="CenterScreen">
+        mc:Ignorable="d" FontSize="14"
+        Title="Mold - Create A New Set" MinHeight="500" MinWidth="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="Select Order Information" Padding="5,8,5,5" BorderBrush="DarkGray">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="OutsoleCode: " VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="Supplier: " VerticalAlignment="Center" Margin="0,5,0,5"/>
+                    <TextBlock Grid.Row="2" Text="Component: " VerticalAlignment="Center"/>
+
+                    <ComboBox Grid.Column="1" x:Name="cbOutsoleCode" DisplayMemberPath="OutsoleCode" SelectedValuePath="OutsoleCode" Height="{Binding ElementName=dpRequestDate, Path=ActualHeight}" VerticalContentAlignment="Center" SelectionChanged="cbOutsoleCode_SelectionChanged"/>
+                    <ComboBox Grid.Column="1" Grid.Row="1" x:Name="cbSupplier" DisplayMemberPath="SupplierName" SelectedValuePath="SupplierID" Margin="0,5,0,5" Height="{Binding ElementName=dpRequestDate, Path=ActualHeight}" VerticalContentAlignment="Center" SelectionChanged="cbSupplier_SelectionChanged"/>
+                    <ComboBox Grid.Column="1" Grid.Row="2" x:Name="cbComponent" DisplayMemberPath="ComponentName" SelectedValuePath="ComponentID" Height="{Binding ElementName=dpRequestDate, Path=ActualHeight}" VerticalContentAlignment="Center" SelectionChanged="cbComponent_SelectionChanged"/>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Column="1" Margin="10,0,0,0" Header="Input Schedule" Padding="5,8,5,5" BorderBrush="DarkGray">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock  Text="Quota (Pairs / Day): " VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1"  Text="Starting Date: " VerticalAlignment="Center" Margin="0,5,0,5"/>
+                    <TextBlock Grid.Row="2"  Text="Requested Date: " VerticalAlignment="Center"/>
+
+                    <TextBox Grid.Column="1" x:Name="txtQuota" BorderBrush="DarkGray" VerticalContentAlignment="Center" Height="{Binding ElementName=dpRequestDate, Path=ActualHeight}"/>
+                    <DatePicker x:Name="dpStartDate" Grid.Row="1" Grid.Column="1" SelectedDate="04/16/1996" Margin="0,5,0,5"/>
+                    <DatePicker x:Name="dpRequestDate" Grid.Row="2" Grid.Column="1" SelectedDate="11/16/2017"/>
+
+                    <Button x:Name="btnOptionRequestDate" Grid.Row="2" Grid.Column="2" Content=". . ." Click="btnOptionRequestDate_Click" Margin="2,0,0,0"/>
+                    <Popup x:Name="popOptionRequestDate" AllowsTransparency="True" PopupAnimation="Slide" PlacementTarget="{Binding ElementName=btnOptionRequestDate}" Visibility="Collapsed">
+                        <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1,1,1,1" MinWidth="150" MinHeight="90" Padding="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Button x:Name="btnClosePopUp" Content="X" HorizontalAlignment="Right" FontWeight="Bold" Foreground="Red" Click="btnClosePopUp_Click" Margin="0,0,0,5" Padding="3,0,3,0"/>
+                                <Button x:Name="btnOptioRequestDatePlus21" Foreground="Blue" Grid.Row="1" Content="= CSD + 21" Click="btnOptioRequestDatePlus21_Click"/>
+                                <Button x:Name="btnOptioRequestDatePlus25" Foreground="Blue" Grid.Row="2" Content="= CSD + 25" Click="btnOptioRequestDatePlus25_Click" Margin="0,5,0,5"/>
+                                <Button x:Name="btnOptioRequestDatePlus30" Foreground="Blue" Grid.Row="3" Content="= CSD + 30" Click="btnOptioRequestDatePlus30_Click"/>
+                            </Grid>
+                        </Border>
+                    </Popup>
+                </Grid>
+            </GroupBox>
+            <Button Margin="20,8,0,0" Grid.Column="2" x:Name="btnAddMold" Content="+ Add Mold" Click="btnAddMold_Click" ToolTip="Click to Add">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock>
+                        <ContentPresenter/>
+                        </TextBlock>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Foreground" Value="Blue" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" Margin="0,10,0,0">
+            <DataGrid Margin="0,5,0,0" x:Name="dgCurrentMold" AutoGenerateColumns="False" 
+                                      CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="True" 
+                                      AlternatingRowBackground="LightCyan" AlternationCount="2" IsReadOnly="True"
+                                      HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" MouseLeftButtonDown="dgCurrentMold_MouseLeftButtonDown">
+                <DataGrid.Columns>
+                    <DataGridTextColumn MinWidth="80" Header="Size No" Binding="{Binding SizeNo}"/>
+                    <DataGridTextColumn MinWidth="80" Header="Quantity" Binding="{Binding Quantity}"/>
+                    <DataGridTextColumn MinWidth="80" Header="Pairs" Binding="{Binding Pairs, StringFormat={}{0:N0}}"/>
+                    <DataGridTextColumn MinWidth="80" Header="Quota" Binding="{Binding Quota}"/>
+                    <DataGridTextColumn MinWidth="80" Header="Starting Date" Binding="{Binding StartDate, StringFormat=MM/dd/yyyy}"/>
+                    <DataGridTextColumn MinWidth="80" Header="Working Days" Binding="{Binding WorkingDay}"/>
+                    <DataGridTextColumn x:Name="colRequestedDate" Header="Finished Date" Binding="{Binding FinishDate, StringFormat=MM/dd/yyyy}">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="Background" Value="{Binding FinishDateBackground}"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Requested Delivery" Binding="{Binding RequestDate, StringFormat=MM/dd/yyyy}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Button Grid.Row="2" Width="{Binding ElementName=colRequestedDate,Path=ActualWidth}" HorizontalAlignment="Right" Margin="0,5,0,0" x:Name="btnCalculate" Content="Calculate" Click="btnCalculate_Click"/>
     </Grid>
 </Window>

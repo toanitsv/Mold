@@ -86,7 +86,7 @@
                         <Button x:Name="btnAddSize" Content="Add Size" Margin="5,0,5,0" Click="btnAddSize_Click">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
-                                    <TextBlock TextDecorations="Underline">
+                                    <TextBlock>
                         <ContentPresenter/>
                                     </TextBlock>
                                 </ControlTemplate>
@@ -96,7 +96,9 @@
                                     <Setter Property="Foreground" Value="Blue" />
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Foreground" Value="Red" />
+                                            <Setter Property="Foreground" Value="Red"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                            <Setter Property="Cursor" Value="Hand"/>
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>

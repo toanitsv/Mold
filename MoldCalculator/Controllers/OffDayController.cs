@@ -59,6 +59,14 @@ namespace MoldCalculator.Controllers
                     db.OffDays.Remove(canDelete);
                     db.SaveChanges();
                 }
+
+                var offDayMappingDeleteList = db.OffDay_Supplier_Mappings.Where(w => w.OffDayID == ID).ToList();
+                foreach (var offDayMappingDelete in offDayMappingDeleteList)
+                {
+                    db.OffDay_Supplier_Mappings.Remove(offDayMappingDelete);
+                    db.SaveChanges();
+                }
+
             }
         }
     }

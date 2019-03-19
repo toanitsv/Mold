@@ -15,6 +15,27 @@
           <Property Name="CreatedTime" Type="datetime" />
           <Property Name="ModifiedTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="Mold">
+          <Key>
+            <PropertyRef Name="MoldID" />
+          </Key>
+          <Property Name="MoldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MoldName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Quota" Type="int" />
+          <Property Name="OutsoleCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="ComponentID" Type="int" />
+          <Property Name="Round" Type="int" />
+          <Property Name="SizeNo" Type="nchar" MaxLength="10" />
+          <Property Name="Pairs" Type="int" />
+          <Property Name="WorkingDay" Type="float" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="FinishDate" Type="date" />
+          <Property Name="RequestDate" Type="date" />
+          <Property Name="CreatedTime" Type="datetime" />
+          <Property Name="ModifiedTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="OffDay">
           <Key>
             <PropertyRef Name="OffDayID" />
@@ -69,6 +90,7 @@
         </EntityType>
         <EntityContainer Name="MouldModelStoreContainer">
           <EntitySet Name="ComponentShoe" EntityType="Self.ComponentShoe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mold" EntityType="Self.Mold" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OffDay" EntityType="Self.OffDay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OffDay_Supplier_Mapping" EntityType="Self.OffDay_Supplier_Mapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
@@ -110,6 +132,7 @@
           <EntitySet Name="OffDay_Supplier_Mapping" EntityType="MouldModel.OffDay_Supplier_Mapping" />
           <EntitySet Name="OffDays" EntityType="MouldModel.OffDay" />
           <EntitySet Name="SizeRuns" EntityType="MouldModel.SizeRun" />
+          <EntitySet Name="Molds" EntityType="MouldModel.Mold" />
         </EntityContainer>
         <EntityType Name="ComponentShoe">
           <Key>
@@ -148,6 +171,27 @@
           <Property Name="Quantity" Type="Int32" />
           <Property Name="CreatedTime" Type="DateTime" Precision="3" />
           <Property Name="ModifiedTiime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Mold">
+          <Key>
+            <PropertyRef Name="MoldID" />
+          </Key>
+          <Property Name="MoldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MoldName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Quota" Type="Int32" />
+          <Property Name="OutsoleCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="ComponentID" Type="Int32" />
+          <Property Name="Round" Type="Int32" />
+          <Property Name="SizeNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Pairs" Type="Int32" />
+          <Property Name="WorkingDay" Type="Double" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="FinishDate" Type="DateTime" Precision="0" />
+          <Property Name="RequestDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -220,6 +264,28 @@
                 <ScalarProperty Name="SizeNo" ColumnName="SizeNo" />
                 <ScalarProperty Name="OutsoleCode" ColumnName="OutsoleCode" />
                 <ScalarProperty Name="SizeRunID" ColumnName="SizeRunID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Molds">
+            <EntityTypeMapping TypeName="MouldModel.Mold">
+              <MappingFragment StoreEntitySet="Mold">
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FinishDate" ColumnName="FinishDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="WorkingDay" ColumnName="WorkingDay" />
+                <ScalarProperty Name="Pairs" ColumnName="Pairs" />
+                <ScalarProperty Name="SizeNo" ColumnName="SizeNo" />
+                <ScalarProperty Name="Round" ColumnName="Round" />
+                <ScalarProperty Name="ComponentID" ColumnName="ComponentID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="OutsoleCode" ColumnName="OutsoleCode" />
+                <ScalarProperty Name="Quota" ColumnName="Quota" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="MoldName" ColumnName="MoldName" />
+                <ScalarProperty Name="MoldID" ColumnName="MoldID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

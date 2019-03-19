@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\PhucNguyen\Desktop\Mold\Mold\MoldCalculator\App.xaml
-7-286267483
+8-1533292629
 2-1499628028
-26-2143912907
+30-988832463
 17-2026019792
-MainWindow.xaml;Views\ComponentWindow.xaml;Views\CreateANewSetWindow.xaml;Views\LoginWindow.xaml;Views\OffDayWindow.xaml;Views\OrderWindow.xaml;Views\SupplierWindow.xaml;
+MainWindow.xaml;Views\AddAMoldWindow.xaml;Views\ComponentWindow.xaml;Views\CreateANewSetWindow.xaml;Views\LoginWindow.xaml;Views\OffDayWindow.xaml;Views\OrderWindow.xaml;Views\SupplierWindow.xaml;
 
 False
 

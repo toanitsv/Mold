@@ -69,5 +69,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Molds">
+      <EntityTypeMapping TypeName="MouldModel.Mold">
+        <MappingFragment StoreEntitySet="Mold">
+          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+          <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="FinishDate" ColumnName="FinishDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="WorkingDay" ColumnName="WorkingDay" />
+          <ScalarProperty Name="Pairs" ColumnName="Pairs" />
+          <ScalarProperty Name="SizeNo" ColumnName="SizeNo" />
+          <ScalarProperty Name="Round" ColumnName="Round" />
+          <ScalarProperty Name="ComponentID" ColumnName="ComponentID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="OutsoleCode" ColumnName="OutsoleCode" />
+          <ScalarProperty Name="Quota" ColumnName="Quota" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="MoldName" ColumnName="MoldName" />
+          <ScalarProperty Name="MoldID" ColumnName="MoldID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

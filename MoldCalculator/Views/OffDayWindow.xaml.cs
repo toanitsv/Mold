@@ -192,7 +192,7 @@ namespace MoldCalculator.Views
             offDayToRemoveList = dgOffDay.SelectedItems.OfType<OffDay>().ToList();
 
             if (offDayToRemoveList.Count <= 0 ||
-                MessageBox.Show("Confirm Remove?", this.Title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                MessageBox.Show("Confirm Remove?", "Mold-Calculator", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
             {
                 return;
             }
@@ -307,7 +307,7 @@ namespace MoldCalculator.Views
         {
             if (supplierCurrentList.Count() == 1)
             {
-                MessageBox.Show("Supplier can not empty !", "Mold Calculator", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Supplier can not empty !", "Mold-Calculator", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             var buttonClicked = sender as Button;

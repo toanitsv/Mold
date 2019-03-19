@@ -31,6 +31,7 @@
     <EntitySet Name="OffDay_Supplier_Mapping" EntityType="MouldModel.OffDay_Supplier_Mapping" />
     <EntitySet Name="OffDays" EntityType="MouldModel.OffDay" />
     <EntitySet Name="SizeRuns" EntityType="MouldModel.SizeRun" />
+    <EntitySet Name="Molds" EntityType="MouldModel.Mold" />
   </EntityContainer>
   <EntityType Name="ComponentShoe">
     <Key>
@@ -69,5 +70,26 @@
     <Property Name="Quantity" Type="Int32" />
     <Property Name="CreatedTime" Type="DateTime" Precision="3" />
     <Property Name="ModifiedTiime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Mold">
+    <Key>
+      <PropertyRef Name="MoldID" />
+    </Key>
+    <Property Name="MoldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MoldName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Quota" Type="Int32" />
+    <Property Name="OutsoleCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SupplierID" Type="Int32" />
+    <Property Name="ComponentID" Type="Int32" />
+    <Property Name="Round" Type="Int32" />
+    <Property Name="SizeNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Pairs" Type="Int32" />
+    <Property Name="WorkingDay" Type="Double" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="FinishDate" Type="DateTime" Precision="0" />
+    <Property Name="RequestDate" Type="DateTime" Precision="0" />
+    <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

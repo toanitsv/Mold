@@ -144,7 +144,7 @@ namespace MoldCalculator.Views
             supplierToRemoveList = dgSupplier.SelectedItems.OfType<Supplier>().ToList();
 
             if (supplierToRemoveList.Count <= 0 ||
-                MessageBox.Show("Confirm Remove?", this.Title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                MessageBox.Show("Confirm Remove?", "Mold-Calculator", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
             {
                 return;
             }
